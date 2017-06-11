@@ -65,29 +65,21 @@
 % Modifique as seções de acordo com o seu projeto
 
 \section{Introdução}
-O aprendizado por demonstração (learning from demonstration - \textit{LfD}) é um dos tópicos mais pesquisados na robótica durante os últimos 30 anos. A ideia do conceito é simples: seria possível treinar um agente para executar uma determinada tarefa demonstrando como ela pode ser executada? Quando a técnica foi iniciada no princípio da década de 80 \cite{lozano1983robot}, o objetivo era substituir a programação de uma tarefa a ser executada pelo robô por um meio automático de aprendizagem. Isso reduziria custos de desenvolvimento e manutenção de robôs fabris. 
+O aprendizado por demonstração é um dos tópicos mais pesquisados na robótica durante os últimos 30 anos. A ideia do conceito é simples: seria possível treinar um agente para executar uma determinada tarefa demonstrando como ela pode ser executada? 
 
+Técnicas de aprendizado baseadas em demonstração são referenciadas por uma série de termos na literatura, como: "Imitation learning", "Programming by Demonstration (PbD)", "Assembly Plan from Observation", "Learning by Showing", "Learning
+by Watching" e "Learning from Observation". Neste levantamento a categoria será denotada pelo termo "Learning from Demonstration" (LfD), conforme sugerido por Argall et al \cite{argall2009survey}.
 
-PbD
-appeared as a promising route to automate the tedious
-manual programming of robots and as way to reduce the
-costs involved in the development and maintenance of
-robots in a factory
+Este artigo apresenta um levantamento bibliográfico sobre o assunto. A primeira seção apresenta uma visão histórica do tema. A seção 2 apresenta uma definição geral do problema. A seção 3 apresenta as principais técnicas de coleta de exemplos que existem na literatura. A seção 4 foca nos métodos de derivação de políticas a partir dos dados coletados. \cite{kober2013reinforcement}
 
-Também conhecido como aprendizado por imitação,.
-Demonstration based learning techniques are described by a variety of terms
-within the published literature, including Learning by Demonstration
-(LbD), Learning from Demonstration (LfD), Programming by
-Demonstration (PbD), Learning by Experienced Demonstrations,
-Assembly Plan from Observation, Learning by Showing, Learning
-by Watching, Learning from Observation, behavioral cloning, imitation
-and mimicry. 
+Na introdução \cite{argall2009survey} \cite{billard2008robot}
 
+\section{História}
+
+Quando a técnica foi iniciada no princípio da década de 80 \cite{lozano1983robot}, o objetivo era substituir a programação de uma tarefa a ser executada pelo robô por um meio automático de aprendizagem. Isso reduziria custos de desenvolvimento e manutenção de robôs fabris. \textbf{CONTINUAR}
 
 Uma das maneiras de se aprender uma política, robô escolhe uma ação dado um determinado estado, é através do aprendizado por demonstração (learning by demonstration - \textit{LfD}). A ideia é que o agente aprenda através de exemplos ou demonstrações providas por um professor. 
 
-Este artigo apresenta um levantamento bibliográfico sobre o assunto. A primeira seção apresenta do assunto de maneira geral. \cite{kober2013reinforcement}
-Na introdução \cite{argall2009survey} \cite{billard2008robot}
 
 
 \section{Definição}
