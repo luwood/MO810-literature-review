@@ -53,59 +53,27 @@
 %%*****************************************************************************
 % Resumo do trabalho
 \begin{abstract}
- O resumo deve conter uma breve descrição sobre várias partes do seu trabalho que serão 
+Este artigo é um levantamento bibliográfico sobre Aprendizado por Demonstração. O tópico vem sendo explorado há décadas por pesquisadores na área de robótica. Poderia um robô aprender uma tarefa dada uma demonstração da mesma? O tema evoluiu deste a simples reprodução de um comportamento gravado para técnicas complexas de derivação de comportamentos genéricos baseadas em Aprendizado de Máquina. 
 \end{abstract}
 
 % Indique três palavras-chave que descrevem o trabalho
 \begin{IEEEkeywords}
- Palavras-chave
+Aprendizado por Demonstração, Learning from demonstration, Imitation Learning, Programming by Demonstration, Aprendizado por Reforço
 \end{IEEEkeywords}
 
 %%*****************************************************************************
 % Modifique as seções de acordo com o seu projeto
 
 \section{Introdução}
-O aprendizado por demonstração é um dos tópicos mais pesquisados na robótica durante os últimos 30 anos. A ideia do conceito é simples: seria possível treinar um agente para executar uma determinada tarefa demonstrando como ela pode ser executada? 
+O aprendizado por demonstração vem sendo um dos tópicos mais pesquisados na robótica durante os últimos 30 anos. A ideia do conceito é simples: seria possível treinar um robô para executar uma determinada tarefa demonstrando como ela pode ser executada? 
 
 Técnicas de aprendizado baseadas em demonstração são referenciadas por uma série de termos na literatura, como: "Imitation learning", "Programming by Demonstration (PbD)", "Assembly Plan from Observation", "Learning by Showing", "Learning
 by Watching" e "Learning from Observation". Neste levantamento a categoria será denotada pelo termo "Learning from Demonstration" (LfD), conforme sugerido por Argall et al \cite{argall2009survey}.
 
-Este artigo apresenta um levantamento bibliográfico sobre o assunto. A primeira seção apresenta uma visão histórica do tema. A seção 2 apresenta uma definição geral do problema. A seção 3 apresenta as principais técnicas de coleta de exemplos que existem na literatura. A seção 4 foca nos métodos de derivação de políticas a partir dos dados coletados. \cite{kober2013reinforcement}
+A relevância do tópico é grande especialmente levando em consideração o Aprendizado por Reforço\cite{kober2013reinforcement}. Isto porque o processo de aprendizado por reforço demanda uma exploração de novos estados e ações. O universo de busca geralmente é considerado infinito e contém diversos elementos que não são importantes para o resultado esperado. Portanto, qualquer técnica que auxilie nesta exploração é interessante. É nesse sentido que o LfD se mostra extremamente útil: ele é um ponto de partida para o sistema e reduz drasticamente o número de estados que precisa ser visitado para encontrar uma solução viável. 
 
-Na introdução \cite{argall2009survey} \cite{billard2008robot}
+Este artigo apresenta um levantamento bibliográfico sobre o assunto. A primeira seção apresenta uma visão histórica do tema. A seção 2 apresenta uma definição geral do problema. A seção 3 apresenta as principais técnicas de coleta de exemplos que existem na literatura. A seção 4 foca nos métodos de derivação de políticas a partir dos dados coletados. A seção 5 cita brevemente problemas abertos na área. 
 
-In order to overcome the need for teleoperation and
-manual ?hard-coding? of every behavior, a learning approach
-is required. The most general approach to learning
-control is reinforcement learning4,5. Reinforcement learning
-usually requires an unambiguous representation of states
-and actions of the movement system and the existence of
-a scalar reward function (see Glossary). Learning proceeds
-by trying actions in a particular state, and, based on
-the received, possibly delayed6 reward, updating an evaluation
-function that assigns expected rewards to possible actions.
-After learning, the action with the highest expected
-value in each state is chosen to achieve the task goal.
-
-An important element of learning control is the requirement
-to explore new actions in order to find good, or even
-optimal, solutions to a given movement task. For a movement
-system with many degrees of freedom, there is an exponential
-explosion in the number of actions that can be
-taken in every state.
-
-it is impossible to search such huge spaces for what constitutes
-a good action, it is necessary to either find more compact
-state?action representations, or to focus learning on
-those parts of the state?action space that are actually relevant
-for the movement task at hand.
-
-
-From the viewpoint of motor learning, a teacher?s
-demonstration as the starting point of one?s own learning
-can significantly speed up the learning process: imitation
-drastically reduces the size of the state?action space that
-needs to be explored
 
 \section{História}
 
@@ -129,44 +97,69 @@ O Aprendizado por Demonstração é um ramo do Aprendizado Supervisionado.
 De modo geral, é uma técnica para assimilação de políticas através da observação de exemplos ou demonstrações. Neste contexto, um exemplo é uma sequência de pares de estado-ação e uma política pode ser entendida como a lógica para transitar entre estes pares. Esta abordagem difere de técnicas de aprendizado por \textit{experiência}, tais como o Aprendizado por Reforço. Através da execução provida por um instrutor, o agente armazena os estados e as ações selecionadas. A política é então derivada destas entradas através de uma função específica, podendo ser inclusive um mapeamento exato do comportamento do demonstrador. 
 
 
-\subsection{O demonstrador e a técnica de demonstração}
+\section{Coletando exemplos}
+O conjunto de dados utilizados pelo LfD é composto de pares estado-ação que foram de alguma forma obtidos durante a demonstração. Esses pares precisam necessariamente ter a capacidade de serem utilizados diretamente pelo robô. Porém, na prática um mapeamento direto dos exemplos de entrada nem sempre é possível, visto que podem haver cenários nos quais o executor da demonstração nem sempre é o aluno. 
+
 O demonstrador pode ser é quem executa a ação que irá ser aprendida. A escolha deste também pode ser quebrada em outras duas categorias: quem controla a ação e quem executa a demonstração. Geralmente os demonstradores são humanos, mas também existem estudos que utilizam outros robôs ou simuladores no papel de instrutores. 
 
 As técnicas para realizar uma demonstração podem ser dividas em duas grandes categorias:
 \begin{itemize}
 \item Tele-operação: o instrutor opera o robô e este grava a execução. O professor pode tanto controlar o robô remotamente, quanto aplicar o \textit{kinesthetic teaching} ( o robô passivamente é controlado por um humano que mexe suas juntas).
-\item \textit{Shadowing}: o robô não executa a ação, ele apenas grava a demonstração de um agente externo. Posteriormente, ele tenta a repetição dos passos, numa tentativa de imitar os movimentos previamente executados.
+\item \textit{Shadowing}: O robô registra a execução usando seus próprios sensores
+e tenta imitar os movimentos do professor.
+\item Sensores no professor: técnica de imitação na qual os sensores estão localizados no corpo do professor. Um exemplo é a utilização de luvas que capturam o movimento de uma mão.
+\item Observação Externa: técnica de imitação na qual os sensores são externos ao corpo do professor e podem ou não pertencer ao aprendiz. A utilização de visão computacional é um exemplo  desta categoria. 
 \end{itemize}
 
-\subsection{Técnicas para derivação da Política}
-Após o passo de coletar exemplos é necessário derivar uma política, realizando assim o aprendizado. As três principais técnicas para realizar essa tarefa estão descritas a seguir e sumarizadas na figura
+\begin{figure}[ht]
+\centering
+\includegraphics[width=1\hsize]{images/ball-in-a-cup.png}
+\caption{Exemplo de \textit{kinesthetic teaching} \cite{nemec2010learning}}
+\label{fig:policy-tech}
+\end{figure}
+
+
+\section{Derivando uma política}
+
+Após o passo de coletar exemplos é necessário derivar uma política, realizando assim o aprendizado. As três principais técnicas para realizar essa tarefa estão descritas a seguir e sumarizadas na figura \ref{fig:policy-tech}.
 \begin{itemize}
 \item Mapeamento de funções: os dados de demonstração são usados para mapear diretamente um par estado-ação.  
-\item Modelo sistemático: os dados de demonstração são utilizados para determinar um modelo de dinâmicas e possivelmente uma função de recompensa. 
+\item Modelo sistemático: os dados de demonstração são utilizados para determinar um modelo de dinâmicas e possivelmente uma função de recompensa. A formulação do sistema se dá geralmente em termos de Aprendizado por Reforço. 
 \item Planos: os dados de demonstração são utilizados para aprender regras que associam pré e pós condições a cada ação. Uma plano de ações é então derivado destas observações. 
 \end{itemize}
-
 
 \begin{figure}[ht]
 \centering
 \includegraphics[width=1\hsize]{images/policy.png}
 \caption{As três principais técnicas de derivação de políticas. Extraído de Argal et al \cite{argall2009survey}}
-\label{fig:robot3-base}
+\label{fig:policy-tech}
 \end{figure}
 
-\section{Coletando exemplos}
-Técnicas para coletar exemplos. 
+Três subcategorias da classificação apresentada serão descritas a seguir. 
 
-\section{Derivando uma política}
-Como uma política é derivada
+\subsection{Mapeamento: Classificação}
+Técnicas de classificação por definição mapeiam o conjunto de entrada em classes discretas. No contexto de derivação de políticas para o LfD, as entradas são compostas pelos estados do agente, enquanto as ações são discretizadas em categorias e compõe a saída do sistema. Assim, métodos como \textit{Decision Trees}\cite{sammut2014learning}, \textit{Gaussian Mixture Models} \cite{chernova2007confidence}, \textit{Bayesian networks} \cite{inoue1999acquisition} podem ser utilizados. 
+
+\subsection{Mapeamento: Regressão}
+Semelhante à classificação, a entrada para o regressor são os estados do robô. Porém a saída deixa de ser discreta e passa a ser contínua, representando de alguma forma uma ação. Exemplos de sua utilização são a aplicação de Redes Neurais para possibilitar direção autônoma de veículos \cite{pomerleau1991efficient}. 
+
+
+\subsection{Modelo sistemático: funções de recompensa programadas}
+Este método utiliza técnicas de aprendizado por reforço nas quais as funções de recompensa são definidas pelo programador. Neste contexto, a demonstração vem sendo utilizada para auxiliar o robô em localizar as recompensas diminuindo o espaço de busca. 
 
 \section{Tópicos abertos}
 
-Nesta seção você deve apresentar claramente os resultados obtidos para os testes efetuados. Procure organizar os dados utilizando uma linguagem científica. Algumas opções são o uso de tabelas e gráficos, para que a compreensão seja fácil e rápida. 
+Os tópicos abertos na área de Aprendizado por Demonstração segundo Billard \cite{billard2008robot} são:
+\begin{itemize}
+\item Como a imitação pode contribuir para o aprendizado motor?
+\item A imitação pode acelerar o aprendizado de habilidades?
+\item É possível encontrar um modelo de representação de movimento que seja comum ao reconhecimento de gestos e o controle motor?
+\item Como extrair a intenção de uma ação apenas por observar sua demonstração?
+\item Como criar uma combinação de Aprendizado por Demonstração com Aprendizado por Reforço de modo que o sistema aprenda em menos tentativas?
+\end{itemize}
 
-\section{Conclusões}
-
-Nesta seção, faça uma análise geral de seu trabalho, levando em conta todo o processo de desenvolvimento e os resultados. Quais os seus pontos fortes? Quais os seus pontos fracos? Quais aspectos de sua metodologia de trabalho foram positivas? Quais foram negativas? O que você recomendaria (ou não recomendaria) a outras pessoas que estejam realizando trabalhos similares aos seus? 
+\section{Conclusão}
+O Aprendizado por Demonstração vem contribuindo para importantes avanços na robótica, especialmente no âmbito do desenvolvimento de comportamentos mais robustos e inteligentes. Além disso, as técnicas de LfD representam uma forma mais intuitiva e natural de comunicação com o robô. Pode-se perceber que a abordagem vem sendo extensivamente utilizada para auxiliar no Aprendizado por Reforço de tarefas.  
 
 
 %******************************************************************************
