@@ -100,11 +100,11 @@ De modo geral, é uma técnica para assimilação de políticas através da observação
 \section{Coletando exemplos}
 O conjunto de dados utilizados pelo LfD é composto de pares estado-ação que foram de alguma forma obtidos durante a demonstração. Esses pares precisam necessariamente ter a capacidade de serem utilizados diretamente pelo robô. Porém, na prática um mapeamento direto dos exemplos de entrada nem sempre é possível, visto que podem haver cenários nos quais o executor da demonstração nem sempre é o aluno. 
 
-O demonstrador pode ser é quem executa a ação que irá ser aprendida. A escolha deste também pode ser quebrada em outras duas categorias: quem controla a ação e quem executa a demonstração. Geralmente os demonstradores são humanos, mas também existem estudos que utilizam outros robôs ou simuladores no papel de instrutores. 
+O demonstrador é quem executa a ação que irá ser aprendida. A escolha deste também pode ser quebrada em outras duas categorias: quem controla a ação e quem executa a demonstração. Geralmente os demonstradores são humanos, mas também existem estudos que utilizam outros robôs ou simuladores no papel de instrutores. 
 
-As técnicas para realizar uma demonstração podem ser dividas em duas grandes categorias:
+As técnicas para realizar uma demonstração podem ser dividas em quatro grandes categorias:
 \begin{itemize}
-\item Tele-operação: o instrutor opera o robô e este grava a execução. O professor pode tanto controlar o robô remotamente, quanto aplicar o \textit{kinesthetic teaching} ( o robô passivamente é controlado por um humano que mexe suas juntas).
+\item Tele-operação: o instrutor opera o robô e este grava a execução. O professor pode tanto controlar o robô remotamente, quanto aplicar o \textit{kinesthetic teaching} (o robô passivamente é controlado por um humano que mexe suas juntas - vide figura \ref{fig:kinesthetic}).
 \item \textit{Shadowing}: O robô registra a execução usando seus próprios sensores
 e tenta imitar os movimentos do professor.
 \item Sensores no professor: técnica de imitação na qual os sensores estão localizados no corpo do professor. Um exemplo é a utilização de luvas que capturam o movimento de uma mão.
@@ -115,7 +115,7 @@ e tenta imitar os movimentos do professor.
 \centering
 \includegraphics[width=1\hsize]{images/ball-in-a-cup.png}
 \caption{Exemplo de \textit{kinesthetic teaching} \cite{nemec2010learning}}
-\label{fig:policy-tech}
+\label{fig:kinesthetic}
 \end{figure}
 
 
