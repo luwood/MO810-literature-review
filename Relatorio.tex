@@ -138,31 +138,21 @@ As técnicas para realizar uma demonstração podem ser dividas em duas grandes cat
 \item \textit{Shadowing}: o robô não executa a ação, ele apenas grava a demonstração de um agente externo. Posteriormente, ele tenta a repetição dos passos, numa tentativa de imitar os movimentos previamente executados.
 \end{itemize}
 
-\subsection{Política derivada}
+\subsection{Técnicas para derivação da Política}
+Após o passo de coletar exemplos é necessário derivar uma política, realizando assim o aprendizado. As três principais técnicas para realizar essa tarefa estão descritas a seguir e sumarizadas na figura
 \begin{itemize}
-\item Mapeamento de funções
-\item Modelo sistemático
-\item Planos
+\item Mapeamento de funções: os dados de demonstração são usados para mapear diretamente um par estado-ação.  
+\item Modelo sistemático: os dados de demonstração são utilizados para determinar um modelo de dinâmicas e possivelmente uma função de recompensa. 
+\item Planos: os dados de demonstração são utilizados para aprender regras que associam pré e pós condições a cada ação. Uma plano de ações é então derivado destas observações. 
 \end{itemize}
 
 
-Ensinar novas tarefas sem a necessidade de reprogramar o robô.
-Baxter é um exemplo.
-http://www.rethinkrobotics.com/smart-collaborative-difference/
-
-
-O aprendizado por demonstração é composto por duas fases: a primeira consiste na coleta de exemplos; a segunda consiste em derivar uma política.
-
-O LfD já foi empregado com sucesso em robôs reais.  
-
-Demonstrationbased
-learning techniques are described by a variety of terms
-within the published literature, including Learning by Demonstration
-(LbD), Learning from Demonstration (LfD), Programming by
-Demonstration (PbD), Learning by Experienced Demonstrations,
-Assembly Plan from Observation, Learning by Showing, Learning
-by Watching, Learning from Observation, behavioral cloning, imitation
-and mimicry. 
+\begin{figure}[ht]
+\centering
+\includegraphics[width=1\hsize]{images/policy.png}
+\caption{As três principais técnicas de derivação de políticas. Extraído de Argal et al \cite{argall2009survey}}
+\label{fig:robot3-base}
+\end{figure}
 
 \section{Coletando exemplos}
 Técnicas para coletar exemplos. 
