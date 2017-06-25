@@ -74,20 +74,60 @@ Este artigo apresenta um levantamento bibliográfico sobre o assunto. A primeira 
 
 Na introdução \cite{argall2009survey} \cite{billard2008robot}
 
+In order to overcome the need for teleoperation and
+manual ?hard-coding? of every behavior, a learning approach
+is required. The most general approach to learning
+control is reinforcement learning4,5. Reinforcement learning
+usually requires an unambiguous representation of states
+and actions of the movement system and the existence of
+a scalar reward function (see Glossary). Learning proceeds
+by trying actions in a particular state, and, based on
+the received, possibly delayed6 reward, updating an evaluation
+function that assigns expected rewards to possible actions.
+After learning, the action with the highest expected
+value in each state is chosen to achieve the task goal.
+
+An important element of learning control is the requirement
+to explore new actions in order to find good, or even
+optimal, solutions to a given movement task. For a movement
+system with many degrees of freedom, there is an exponential
+explosion in the number of actions that can be
+taken in every state.
+
+it is impossible to search such huge spaces for what constitutes
+a good action, it is necessary to either find more compact
+state?action representations, or to focus learning on
+those parts of the state?action space that are actually relevant
+for the movement task at hand.
+
+
+From the viewpoint of motor learning, a teacher?s
+demonstration as the starting point of one?s own learning
+can significantly speed up the learning process: imitation
+drastically reduces the size of the state?action space that
+needs to be explored
+
 \section{História}
 
-No início da década de 80, impulsionado pelo interesse da indústria, as primeiras abordagens de técnicas baseadas em demonstração começaram a surgir\cite{lozano1983robot}. O objetivo era substituir a programação de uma tarefa a ser executada por um robô por um meio automático de aprendizagem. Isso reduziria custos de desenvolvimento e manutenção do mesmo.
+No início da década de 80, impulsionado pelo interesse da indústria, as primeiras abordagens de técnicas baseadas em demonstração começaram a surgir\cite{billard2008robot}. O objetivo era substituir a programação manual de uma tarefa a ser executada por um robô por um meio automático de aprendizagem. Isso reduziria custos de desenvolvimento e manutenção do mesmo.
 
-\textbf{CONTINUAR}
+As primeiras abordagens para o "\textit{Programming by Demonstration (PbD)}" utilizavam técnicas de raciocínio simbólico. A demonstração era realizada através da tele-operação num processo chamado \textit{"guiding"} \cite{lozano1983robot}. O robô gravava as ações primitivas executadas e as posições dos objetos manipulados. Posteriormente, a tarefa poderia ser re-executada (\textit{"played-back"}). Esta abordagem apresentava uma série de problemas, uma simples variação na posição do objeto manipulado, por exemplo, representava uma falha porque o estado não era esperado.  
 
+Em 1994 Muench \cite{muench1994robot} propôs a utilização de técnicas de aprendizado de máquina para auxiliar no \textit{PbD}. A meta era aprimorar o aprendizado que simplesmente era capaz de repetir os movimentos aprendidos, empregando soluções que realmente envolviam \textit{aprendizado}. Para alcançar este objetivo dois problemas precisavam ser solucionados: (1)  o modelo de representação da demonstração; (2) prover um número suficiente de exemplos para obter uma modelagem genérica. A partir deste momento o termo "Learning from Demonstration (LfD)" ser tornou mais apropriado para referenciar o assunto. 
+
+A área evoluiu os mecanismos de captação do aprendizado como a utilização de técnicas de visão computacional, \textit{werables} e \textit{kinesthetic
+teaching} (manualmente guiar o braço robótico para lhe realizar a demonstração do movimento)\cite{calinon2007learning}.
+Além disso, o LfD passou a incorporar avanços na área de Aprendizado de Máquina, tanto para questão de percepção quanto para generalização do modelo aprendido, empregando técnicas como lógica \textit{Fuzzy}, \textit{Artificial Neural Networks}, \textit{Radial-Basis Function Networks} e  \textit{Hidden Markov Models}.
+
+Nos últimos 15 anos com o progresso do esforço interdisciplinar entre robótica e biologia, a área de LfD passou a levar em consideração 
+evidência de mecanismos neurais específicos para imitação visual encontrada em primatas \cite{schaal1999imitation}. O termo mais biológico  \textit{"Imitation Learning"} surgiu nesse cenário. 
 
 
 
 \section{Definição}
 
 O Aprendizado por Demonstração é um ramo do Aprendizado Supervisionado. 
-De modo geral, é uma técnica para assimilação de políticas através da observação de exemplos ou demonstrações. Neste contexto, um exemplo é uma sequência de pares de estado-ação e uma política pode ser entendida como a lógica para transitar entre estes pares. Esta abordagem difere de outras técnicas de aprendizado por \textit{experiência}, tais como o Aprendizado por Reforço. 
-
+De modo geral, é uma técnica para assimilação de políticas através da observação de exemplos ou demonstrações. Neste contexto, um exemplo é uma sequência de pares de estado-ação e uma política pode ser entendida como a lógica para transitar entre estes pares. Esta abordagem difere de outras técnicas de aprendizado por \textit{experiência}, tais como o Aprendizado por Reforço. Através da execução provida por um instrutor, o agente armazena os estados e as ações selecionadas. A política é então derivada destas entradas através de uma função específica, podendo ser inclusive um mapeamento exato do comportamento do demonstrador. 
 
 
 \subsection{O demonstrador}
