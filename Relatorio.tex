@@ -123,18 +123,19 @@ Nos últimos 15 anos com o progresso do esforço interdisciplinar entre robótica e
 evidência de mecanismos neurais específicos para imitação visual encontrada em primatas \cite{schaal1999imitation}. O termo mais biológico  \textit{"Imitation Learning"} surgiu nesse cenário. 
 
 
-
 \section{Definição}
 
 O Aprendizado por Demonstração é um ramo do Aprendizado Supervisionado. 
-De modo geral, é uma técnica para assimilação de políticas através da observação de exemplos ou demonstrações. Neste contexto, um exemplo é uma sequência de pares de estado-ação e uma política pode ser entendida como a lógica para transitar entre estes pares. Esta abordagem difere de outras técnicas de aprendizado por \textit{experiência}, tais como o Aprendizado por Reforço. Através da execução provida por um instrutor, o agente armazena os estados e as ações selecionadas. A política é então derivada destas entradas através de uma função específica, podendo ser inclusive um mapeamento exato do comportamento do demonstrador. 
+De modo geral, é uma técnica para assimilação de políticas através da observação de exemplos ou demonstrações. Neste contexto, um exemplo é uma sequência de pares de estado-ação e uma política pode ser entendida como a lógica para transitar entre estes pares. Esta abordagem difere de técnicas de aprendizado por \textit{experiência}, tais como o Aprendizado por Reforço. Através da execução provida por um instrutor, o agente armazena os estados e as ações selecionadas. A política é então derivada destas entradas através de uma função específica, podendo ser inclusive um mapeamento exato do comportamento do demonstrador. 
 
 
-\subsection{O demonstrador}
-Quem controla a demonstração e quem executa a demonstração. 
+\subsection{O demonstrador e a técnica de demonstração}
+O demonstrador pode ser é quem executa a ação que irá ser aprendida. A escolha deste também pode ser quebrada em outras duas categorias: quem controla a ação e quem executa a demonstração. Geralmente os demonstradores são humanos, mas também existem estudos que utilizam outros robôs ou simuladores no papel de instrutores. 
+
+As técnicas para realizar uma demonstração podem ser dividas em duas grandes categorias:
 \begin{itemize}
-\item Professor robo
-\item Humano tele-operar o robo e o robo executar a tarefa
+\item Tele-operação: o instrutor opera o robô e este grava a execução. O professor pode tanto controlar o robô remotamente, quanto aplicar o \textit{kinesthetic teaching} ( o robô passivamente é controlado por um humano que mexe suas juntas).
+\item \textit{Shadowing}: o robô não executa a ação, ele apenas grava a demonstração de um agente externo. Posteriormente, ele tenta a repetição dos passos, numa tentativa de imitar os movimentos previamente executados.
 \end{itemize}
 
 \subsection{Política derivada}
